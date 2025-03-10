@@ -18,18 +18,23 @@ class Tweet(CommonModel):
         related_name= 'tweets'
     )
     def __str__(self):
-        return self.user
+        return self.name
+
+    def count_like(self):
+            return self.likes.count()
+
+
 
 class Like(CommonModel):
-    name = models.CharField(
+    reply = models.CharField(
         max_length=10,
     )
-    user = models.ForeignKey(
-        'users.User',
+    select_tweet = models.ForeignKey(
+        'tweets.Tweet',
         null = True,
         blank = True,
         on_delete = models.SET_NULL,
         related_name='likes'
     )
     def __str__(self):
-        return self.name
+        return self.reply
