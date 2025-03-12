@@ -1,0 +1,21 @@
+<h1>{{title}}</h1>
+<ul>
+  {% for tweet in tweets%}
+  <li>
+
+    <h3>
+      User : {{tweet.user}}
+    </h3>
+    <br/>
+
+    Title : {{tweet.name}}
+    <br/>
+
+    Payload : {{tweet.payload}}
+    <br/>
+
+    Like : {{tweet.count_like}}👍🏻
+  </li>
+  <br/>
+
+  {% endfor %}</ul>
