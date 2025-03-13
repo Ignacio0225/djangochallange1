@@ -1,0 +1,19 @@
+<h1>{{title}}</h1>
+{%if not not_found%}
+<ul>{% for tweet in user_tweet %}
+    <li>
+        <h3>
+        USER : {{tweet.user}}
+        </h3>
+
+        </br>
+            TITLE : {{tweet.name}}
+        </br>
+            PAYLOAD : {{tweet.payload}}
+        </br>
+    </li>
+
+    {% endfor%}
+</ul>
+{% else %} <h1>404 not found!!!!!!!!!!!!!!</h1>
+{% endif%}
