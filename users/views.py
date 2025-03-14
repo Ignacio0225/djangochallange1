@@ -1,14 +1,26 @@
-
-from http.client import HTTPResponse
+from rest_framework.response import Response
+from rest_framework.exceptions import NotFound
+from rest_framework.views import APIView
 from .models import User
-from django.shortcuts import render
+from .serializer import UserSerializer
+
 
 # Create your views here.
 
-def user(request,pk):
-    try:
-        user_pk = User.objects.get(pk=pk)
-        user_tweet = user_pk.tweets.all()
-        return render(request,'users.html',{'user_tweet':user_tweet,"title":"DjangoChallenge2"})
-    except User.DoesNotExist: #User 는 모델에서 가져오는거 모델이 없으면 이라는거임
-        return render(request,"users.html", {"not_found": True})
+class Users(APIView):
+    def get(self,request):
+        all_users = User.objects.all()
+        serializer = UserSerializer(all_users,many=True)
+        return Response(serializer.data)
+
+class UserDetail(APIView):
+    def get_object(self,pk):
+        try:
+            return User.objects.get(pk=pk)
+        except User.DoesNotExist:
+            raise NotFound
+
+    def get(self,request,pk):
+        user = self.get_object(pk)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)

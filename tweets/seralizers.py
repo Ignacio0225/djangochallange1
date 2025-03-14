@@ -1,10 +1,9 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
+from .models import Tweet
 
-class TweetSerializer(serializers.Serializer):
-    name = serializers.CharField(
-        required=True,
-        max_length=10,
-    )
-    payload = serializers.CharField(
-        max_length=180,
-    )
+
+class TweetSerializer(ModelSerializer):
+
+    class Meta:
+        model = Tweet
+        fields = '__all__'
