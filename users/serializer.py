@@ -10,4 +10,5 @@ class UserSerializer(ModelSerializer):
             'username',
             'avatar',
             'name',
+            ''
         )

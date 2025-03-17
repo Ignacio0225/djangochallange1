@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('',views.Users.as_view()),
-    path('<int:pk>/tweet',views.UserDetail.as_view()),
+    path('<int:pk>',views.UserDetail.as_view()),
+    path('<int:pk>/tweets',views.UserTweet.as_view()),
 
 ]
