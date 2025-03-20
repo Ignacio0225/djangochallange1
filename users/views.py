@@ -115,3 +115,11 @@ class LogOud(APIView):
     def post(self,request):
         logout(request)
         return Response({"confirm":"see you again"})
+
+class Me(APIView):
+    def get(self,request):
+        user = request.user
+        if user.is_authenticated:
+            serializer = UserSerializer(user)
+            return Response(serializer.data)
+        raise NotAuthenticated
