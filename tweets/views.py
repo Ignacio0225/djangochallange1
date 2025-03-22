@@ -18,11 +18,10 @@ class Tweets(APIView):
     def post(self,request):
         if request.user.is_authenticated:
             serializer = TweetSerializer(
-                data=request.data,
-                many=True,
+                data=request.data
             )
             if serializer.is_valid():
-                tweets = serializer.save()
+                tweets = serializer.save(user = request.user)
                 return Response(TweetSerializer(tweets).data)
             else:
                 return Response(serializer.errors)
@@ -72,4 +71,4 @@ class TweetDetail(APIView):
             raise PermissionDenied
 
         tweet.delete()
-        return Response(HTTP_204_NO_CONTENT)
+        return Response(status=HTTP_204_NO_CONTENT)
